@@ -7,10 +7,18 @@ public enum Languages {
     ITALIAN("it"),
     PORTUGUESE("pt");
     
-    private String languages;
+    private String languagesAlura;
     
-    Languages ( String languages ) {
-        this.languages = languages;
+    Languages ( String languagesAlura ) {
+        this.languagesAlura = languagesAlura;
+    }
+    
+    public static Languages fromString(String text) {
+        for (Languages categoria : Languages.values())
+            if ( categoria.languagesAlura.equalsIgnoreCase(text) ) {
+                return categoria;
+            }
+        throw new IllegalArgumentException("Ninguna categoria encontrada: " + text);
     }
     
     }

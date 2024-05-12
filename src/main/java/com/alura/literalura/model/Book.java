@@ -15,7 +15,8 @@ public class Book {
     private String title;
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AuthorInfo> authors;
-    private List<String> languages;
+    @Enumerated(EnumType.STRING)
+    private Languages languages;
     private Double downloads;
     
     public Book () {
@@ -26,7 +27,7 @@ public class Book {
     
     public Book ( String title, List<String> languages, Double downloads, List<Authors> authors ) {
         this.title = title;
-        this.languages = languages;
+        this.languages = Languages.fromString(languages.get(0));
         this.downloads = downloads;
         this.authors = new ArrayList<>();
         for ( Authors authorInfo : authors ) {
@@ -52,11 +53,11 @@ public class Book {
         this.downloads = downloads;
     }
     
-    public List<String> getLanguages () {
+    public Languages getLanguages () {
         return languages;
     }
     
-    public void setLanguages ( List<String> languages ) {
+    public void setLanguages ( Languages languages ) {
         this.languages = languages;
     }
     
